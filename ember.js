@@ -5,7 +5,7 @@
  *            Portions Copyright 2008-2011 Apple Inc. All rights reserved.
  * @license   Licensed under MIT license
  *            See https://raw.github.com/emberjs/ember.js/master/LICENSE
- * @version   1.13.10+33df9d99
+ * @version   1.13.10+b71d17fd
  */
 
 (function() {
@@ -1784,7 +1784,7 @@ enifed('container/registry', ['exports', 'ember-metal/core', 'ember-metal/dictio
       _emberMetalCore["default"].assert('Create a container on the registry (with `registry.container()`) before calling `lookup`.', this._defaultContainer);
 
       if (instanceInitializersFeatureEnabled) {
-        _emberMetalCore["default"].deprecate('`lookup` was called on a Registry. The `initializer` API no longer receives a container, and you should use an `instanceInitializer` to look up objects from the container.', false, { url: "http://emberjs.com/guides/deprecations#toc_deprecate-access-to-instances-in-initializers" });
+        _emberMetalCore["default"].deprecate('`lookup` was called on a Registry. The `initializer` API no longer receives a container, and you should use an `instanceInitializer` to look up objects from the container.', false, { id: 'container.calling-lookup-from-registry', until: '2.0.0', url: "http://emberjs.com/guides/deprecations#toc_deprecate-access-to-instances-in-initializers" });
       }
 
       return this._defaultContainer.lookup(fullName, options);
@@ -1794,7 +1794,7 @@ enifed('container/registry', ['exports', 'ember-metal/core', 'ember-metal/dictio
       _emberMetalCore["default"].assert('Create a container on the registry (with `registry.container()`) before calling `lookupFactory`.', this._defaultContainer);
 
       if (instanceInitializersFeatureEnabled) {
-        _emberMetalCore["default"].deprecate('`lookupFactory` was called on a Registry. The `initializer` API no longer receives a container, and you should use an `instanceInitializer` to look up objects from the container.', false, { url: "http://emberjs.com/guides/deprecations#toc_deprecate-access-to-instances-in-initializers" });
+        _emberMetalCore["default"].deprecate('`lookupFactory` was called on a Registry. The `initializer` API no longer receives a container, and you should use an `instanceInitializer` to look up objects from the container.', false, { id: 'container.calling-lookupfactory-from-registry', until: '2.0.0', url: "http://emberjs.com/guides/deprecations#toc_deprecate-access-to-instances-in-initializers" });
       }
 
       return this._defaultContainer.lookupFactory(fullName);
@@ -5454,7 +5454,7 @@ enifed('ember-application/utils/validate-type', ['exports'], function (exports) 
     var expectedType = validationAttributes[2];
 
     if (action === 'deprecate') {
-      Ember.deprecate('In Ember 2.0 ' + parsedName.type + ' factories must have an `' + factoryFlag + '` ' + ('property set to true. You registered ' + resolvedType + ' as a ' + parsedName.type + ' ') + ('factory. Either add the `' + factoryFlag + '` property to this factory or ') + ('extend from ' + expectedType + '.'), resolvedType[factoryFlag]);
+      Ember.deprecate('In Ember 2.0 ' + parsedName.type + ' factories must have an `' + factoryFlag + '` ' + ('property set to true. You registered ' + resolvedType + ' as a ' + parsedName.type + ' ') + ('factory. Either add the `' + factoryFlag + '` property to this factory or ') + ('extend from ' + expectedType + '.'), resolvedType[factoryFlag], { id: 'ember-application.validate-type', until: '3.0.0' });
     } else {
       Ember.assert('Expected ' + parsedName.fullName + ' to resolve to an ' + expectedType + ' but ' + ('instead it was ' + resolvedType + '.'), function () {
         return resolvedType[factoryFlag];
@@ -9702,7 +9702,7 @@ enifed("ember-htmlbars/keywords/real_outlet", ["exports", "ember-metal/property_
 
   "use strict";
 
-  _emberHtmlbarsTemplatesTopLevelView["default"].meta.revision = 'Ember@1.13.10+33df9d99';
+  _emberHtmlbarsTemplatesTopLevelView["default"].meta.revision = 'Ember@1.13.10+b71d17fd';
 
   exports["default"] = {
     willRender: function (renderNode, env) {
@@ -11639,7 +11639,7 @@ enifed("ember-htmlbars/system/lookup-helper", ["exports", "ember-metal/core", "e
   }
 
   function isLegacyBareHelper(helper) {
-    return helper && (!helper.isHelperFactory && !helper.isHelperInstance && !helper.isHTMLBars);
+    return helper && !helper.isHelperFactory && !helper.isHelperInstance && !helper.isHTMLBars;
   }
 
   /**
@@ -16033,7 +16033,7 @@ enifed('ember-metal/core', ['exports'], function (exports) {
   
     @class Ember
     @static
-    @version 1.13.10+33df9d99
+    @version 1.13.10+b71d17fd
     @public
   */
 
@@ -16067,11 +16067,11 @@ enifed('ember-metal/core', ['exports'], function (exports) {
   
     @property VERSION
     @type String
-    @default '1.13.10+33df9d99'
+    @default '1.13.10+b71d17fd'
     @static
     @public
   */
-  Ember.VERSION = '1.13.10+33df9d99';
+  Ember.VERSION = '1.13.10+b71d17fd';
 
   /**
     The hash of environment variables used to control various configuration
@@ -25114,7 +25114,7 @@ enifed("ember-routing-views/views/link", ["exports", "ember-metal/core", "ember-
 
   "use strict";
 
-  _emberHtmlbarsTemplatesLinkTo["default"].meta.revision = 'Ember@1.13.10+33df9d99';
+  _emberHtmlbarsTemplatesLinkTo["default"].meta.revision = 'Ember@1.13.10+b71d17fd';
 
   var linkComponentClassNameBindings = ['active', 'loading', 'disabled'];
   
@@ -25641,7 +25641,7 @@ enifed("ember-routing-views/views/outlet", ["exports", "ember-views/views/view",
 
   "use strict";
 
-  _emberHtmlbarsTemplatesTopLevelView["default"].meta.revision = 'Ember@1.13.10+33df9d99';
+  _emberHtmlbarsTemplatesTopLevelView["default"].meta.revision = 'Ember@1.13.10+b71d17fd';
 
   var CoreOutletView = _emberViewsViewsView["default"].extend({
     defaultTemplate: _emberHtmlbarsTemplatesTopLevelView["default"],
@@ -32960,7 +32960,7 @@ enifed('ember-runtime/controllers/array_controller', ['exports', 'ember-metal/co
     },
 
     init: function () {
-      _emberMetalCore["default"].deprecate(arrayControllerDeprecation, this.isGenerated, { url: 'http://emberjs.com/guides/deprecations#toc_arraycontroller' });
+      _emberMetalCore["default"].deprecate(arrayControllerDeprecation, this.isGenerated, { id: 'ember-runtime.array-controller', until: '2.0.0', url: 'http://emberjs.com/guides/deprecations#toc_arraycontroller' });
 
       this._super.apply(this, arguments);
       this._subControllers = [];
@@ -33133,7 +33133,7 @@ enifed('ember-runtime/controllers/object_controller', ['exports', 'ember-metal/c
   exports["default"] = _emberRuntimeSystemObject_proxy["default"].extend(_emberRuntimeMixinsController["default"], {
     init: function () {
       this._super();
-      _emberMetalCore["default"].deprecate(objectControllerDeprecation, this.isGenerated);
+      _emberMetalCore["default"].deprecate(objectControllerDeprecation, this.isGenerated, { id: 'ember-runtime.object-controller', until: '2.0.0' });
     }
   });
 });
@@ -37356,6 +37356,11 @@ enifed("ember-runtime/mixins/sortable", ["exports", "ember-metal/core", "ember-m
       @private
     */
     sortFunction: _emberRuntimeCompare["default"],
+
+    init: function () {
+      this._super.apply(this, arguments);
+      _emberMetalCore["default"].deprecate("Ember.SortableMixin is deprecated and was used in " + this + ". Please use Ember.computed.sort instead.", this.isGenerated);
+    },
 
     orderBy: function (item1, item2) {
       var result = 0;
@@ -42639,7 +42644,7 @@ enifed("ember-template-compiler/system/compile_options", ["exports", "ember-meta
 
     options.buildMeta = function buildMeta(program) {
       return {
-        revision: 'Ember@1.13.10+33df9d99',
+        revision: 'Ember@1.13.10+b71d17fd',
         loc: program.loc,
         moduleName: options.moduleName
       };
@@ -46336,7 +46341,8 @@ enifed("ember-views/system/build-component-template", ["exports", "htmlbars-runt
       // element. We use `manualElement` to create a template that represents
       // the wrapping element and yields to the previous block.
       if (tagName !== '') {
-        var attributes = normalizeComponentAttributes(component, isAngleBracket, attrs);
+        var canChangeType = canChangeTypeAfterRender(attrs);
+        var attributes = normalizeComponentAttributes(component, isAngleBracket, attrs, canChangeType);
         var elementTemplate = _htmlbarsRuntime.internal.manualElement(tagName, attributes);
         elementTemplate.meta = meta;
 
@@ -46351,6 +46357,31 @@ enifed("ember-views/system/build-component-template", ["exports", "htmlbars-runt
     //   * the falsy value "" if set explicitly on the component
     //   * an actual tagName set explicitly on the component
     return { createdElement: !!tagName, block: blockToRender };
+  }
+
+  // Static flag used to see if we can mutate the type attribute on elements. IE8
+  // does not support changing the type attribute after an element is inserted in
+  // a tree.
+  var isTypeAttributeMutable = (function () {
+    var docFragment = document.createDocumentFragment();
+    var mutableInputTypeTextElement = document.createElement('input');
+    mutableInputTypeTextElement.type = 'text';
+    try {
+      docFragment.appendChild(mutableInputTypeTextElement);
+      mutableInputTypeTextElement.setAttribute('type', 'password');
+    } catch (e) {
+      return false;
+    }
+    return true;
+  })();
+
+  function canChangeTypeAfterRender(attrs) {
+    // This permits testing of the unbound type attr behavior outside of IE8.
+    if (attrs.ie8SafeInput) {
+      return false;
+    }
+
+    return isTypeAttributeMutable;
   }
 
   function blockFor(template, options) {
@@ -46423,7 +46454,7 @@ enifed("ember-views/system/build-component-template", ["exports", "htmlbars-runt
 
   // Takes a component and builds a normalized set of attribute
   // bindings consumable by HTMLBars' `attribute` hook.
-  function normalizeComponentAttributes(component, isAngleBracket, attrs) {
+  function normalizeComponentAttributes(component, isAngleBracket, attrs, canChangeType) {
     var normalized = {};
     var attributeBindings = component.attributeBindings;
     var i, l;
@@ -46495,6 +46526,29 @@ enifed("ember-views/system/build-component-template", ["exports", "htmlbars-runt
         normalized.style = ['subexpr', 'concat', [existingStyle, ' ', hiddenStyle], []];
       } else {
         normalized.style = hiddenStyle;
+      }
+    }
+
+    // IE8 Support: IE8 cannot change the type attr of an input after it has been appended to
+    // any node. Therefore, we detect if the browser cannot change the type of the input after
+    // being appended, and unbind type.
+    if (normalized.type && !canChangeType) {
+      if (normalized.type[0] === 'get') {
+        // Handle case when type is a bound attribute but has no attribute value
+        // specified in the component template. Look up the default value in the
+        // component.
+        Ember.warn("Bound type attr on input. In IE8 this attribute will not be updated after initial render. https://github.com/tildeio/htmlbars/issues/380.");
+        var type = normalized.type[1];
+        var periodIndex = type.indexOf(".");
+        var property = type.substring(periodIndex + 1);
+        normalized.type = component.get(property);
+      } else if (normalized.type[0] === 'value' && typeof normalized.type[1] !== 'string') {
+        // Handle case where a non-string value is passed as an attribute in the
+        // component template. Fall back to the default value in the component.
+        Ember.warn("Invalid type attr on input. In IE8 this attribute will not be updated after initial render. https://github.com/tildeio/htmlbars/issues/380.");
+        normalized.type = component.get('type');
+      } else {
+        normalized.type = normalized.type[1];
       }
     }
 
@@ -47641,7 +47695,7 @@ enifed("ember-views/views/component", ["exports", "ember-metal/core", "ember-vie
     */
     template: _emberMetalComputed.computed({
       get: function () {
-        _emberMetalCore["default"].deprecate("Accessing 'template' in " + this + " is deprecated. To determine if a block was specified to " + this + " please use '{{#if hasBlock}}' in the components layout.");
+        _emberMetalCore["default"].deprecate("Accessing 'template' in " + this + " is deprecated. To determine if a block was specified to " + this + " please use '{{#if hasBlock}}' in the components layout.", false, { id: 'ember-views.accessing-template', until: '2.0.0' });
 
         return _emberMetalProperty_get.get(this, '_template');
       },
@@ -47891,7 +47945,7 @@ enifed("ember-views/views/component", ["exports", "ember-metal/core", "ember-vie
 enifed("ember-views/views/container_view", ["exports", "ember-metal/core", "ember-runtime/mixins/mutable_array", "ember-views/views/view", "ember-metal/property_get", "ember-metal/property_set", "ember-metal/enumerable_utils", "ember-metal/mixin", "ember-metal/events", "ember-htmlbars/templates/container-view"], function (exports, _emberMetalCore, _emberRuntimeMixinsMutable_array, _emberViewsViewsView, _emberMetalProperty_get, _emberMetalProperty_set, _emberMetalEnumerable_utils, _emberMetalMixin, _emberMetalEvents, _emberHtmlbarsTemplatesContainerView) {
   "use strict";
 
-  _emberHtmlbarsTemplatesContainerView["default"].meta.revision = 'Ember@1.13.10+33df9d99';
+  _emberHtmlbarsTemplatesContainerView["default"].meta.revision = 'Ember@1.13.10+b71d17fd';
 
   /**
   @module ember
@@ -49445,7 +49499,9 @@ enifed("ember-views/views/text_field", ["exports", "ember-metal/computed", "embe
     value: "",
 
     /**
-      The `type` attribute of the input element.
+      The `type` attribute of the input element. To remain compatible with IE8, this
+      cannot change after the element has been rendered. It is suggested to avoid using
+      a dynamic type attribute if you are supporting IE8 since it will be set once and never change.
        @property type
       @type String
       @default "text"
@@ -50760,15 +50816,15 @@ enifed("ember-views/views/view", ["exports", "ember-metal/core", "ember-runtime/
     scheduleRevalidate: function (node, label, manualRerender) {
       if (node && !this._dispatching && node.guid in this.env.renderedNodes) {
         if (manualRerender) {
-          _emberMetalCore["default"].deprecate("You manually rerendered " + label + " (a parent component) from a child component during the rendering process. This rarely worked in Ember 1.x and will be removed in Ember 2.0");
+          _emberMetalCore["default"].deprecate("You manually rerendered " + label + " (a parent component) from a child component during the rendering process. This rarely worked in Ember 1.x and will be removed in Ember 3.0", false, { id: 'ember-views.manual-parent-rerender', until: '3.0.0' });
         } else {
-          _emberMetalCore["default"].deprecate("You modified " + label + " twice in a single render. This was unreliable in Ember 1.x and will be removed in Ember 2.0");
+          _emberMetalCore["default"].deprecate("You modified " + label + " twice in a single render. This was unreliable in Ember 1.x and will be removed in Ember 3.0", false, { id: 'ember-views.render-double-modify', until: '3.0.0' });
         }
         _emberMetalRun_loop["default"].scheduleOnce('render', this, this.revalidate);
         return;
       }
 
-      _emberMetalCore["default"].deprecate("A property of " + this + " was modified inside the " + this._dispatching + " hook. You should never change properties on components, services or models during " + this._dispatching + " because it causes significant performance degradation.", !this._dispatching);
+      _emberMetalCore["default"].deprecate("A property of " + this + " was modified inside the " + this._dispatching + " hook. You should never change properties on components, services or models during " + this._dispatching + " because it causes significant performance degradation.", !this._dispatching, { id: 'ember-views.dispatching-modify-property', until: '3.0.0' });
 
       if (!this.scheduledRevalidation || this._dispatching) {
         this.scheduledRevalidation = true;
